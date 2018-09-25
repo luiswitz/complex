@@ -19,3 +19,16 @@ after_success:
   - docker push luiswitz/multi-nginx
   - docker push luiswitz/multi-server
   - docker push luiswitz/multi-worker
+
+deploy:
+  provider: elastibeanstalk
+  region: us-west-2
+  app: complex
+  env: Complex-env
+  bucket_name: elasticbeanstalk-us-west-2-599611906549 
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
