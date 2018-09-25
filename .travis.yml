@@ -21,7 +21,7 @@ after_success:
   - docker push luiswitz/multi-worker
 
 deploy:
-  provider: elastibeanstalk
+  provider: elasticbeanstalk
   region: us-west-2
   app: complex
   env: Complex-env
