@@ -14,9 +14,7 @@ after_success:
   - docker build -t luiswitz/multi-nginx ./nginx
   - docker build -t luiswitz/multi-server ./server
   - docker build -t luiswitz/multi-worker ./worker
-  # login in docker hub
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  # push images to docker hub
   - docker push luiswitz/multi-client
   - docker push luiswitz/multi-nginx
   - docker push luiswitz/multi-server
