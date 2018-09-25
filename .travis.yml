@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t luiswitz/react-test -f ./client/Dockerfile.dev
+  - docker build -t luiswitz/react-test -f ./client/Dockerfile.dev ./client
 
 scripts:
   - docker run luiswitz/react-test npm test -- --coverage
