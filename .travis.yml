@@ -1,0 +1,21 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t luiswitz/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run luiswitz/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t luiswitz/multi-client ./client
+  - docker build -t luiswitz/multi-nginx ./nginx
+  - docker build -t luiswitz/multi-server ./server
+  - docker build -t luiswitz/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push luiswitz/multi-client
+  - docker push luiswitz/multi-nginx
+  - docker push luiswitz/multi-server
+  - docker push luiswitz/multi-worker
